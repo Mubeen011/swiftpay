@@ -7,7 +7,14 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 @SpringBootTest(
-        properties = "spring.kafka.listener.auto-startup=false"
+        properties = {
+                "spring.kafka.listener.auto-startup=false",
+                "spring.datasource.url=jdbc:h2:mem:swiftpaytest",
+                "spring.datasource.driver-class-name=org.h2.Driver",
+                "spring.datasource.username=sa",
+                "spring.datasource.password=",
+                "spring.jpa.hibernate.ddl-auto=create-drop"
+        }
 )
 class TransactionGatewayApplicationTests {
 
@@ -20,5 +27,4 @@ class TransactionGatewayApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }
