@@ -1,0 +1,42 @@
+name: SwiftPay CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Make Maven wrappers executable
+        run: chmod +x transaction-gateway/mvnw ledger-service/mvnw
+
+      - name: Build and test Transaction Gateway
+        working-directory: transaction-gateway
+        run: ./mvnw clean package -Duser.timezone=UTC
+
+      - name: Build and test Ledger Service
+        working-directory: ledger-service
+        run: ./mvnw clean package -Duser.timezone=UTC
+
+      - name: Build Transaction Gateway Docker image
+        run: docker build -t swiftpay-transaction-gateway ./transaction-gateway
+
+      - name: Build Ledger Service Docker image
+        run: docker build -t swiftpay-ledger-service ./ledger-service
