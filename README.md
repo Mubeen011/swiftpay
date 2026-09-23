@@ -345,13 +345,13 @@ Run it with:
 
 ## PCAP
 
-Network traffic was captured using Wireshark `dumpcap` during the load test.
+Network traffic was captured using Wireshark `dumpcap` during the 250 TPS load test.
 
-`load-test/swiftpay-250tps-1m.pcapng`
+The capture contains traffic from the 1M transaction load test:
 
-The resulting capture is approximately **914 MB**.
+[`swiftpay-250tps-1m.pcapng`](load-test/swiftpay-250tps-1m.pcapng)
 
-The PCAP is kept outside Git because of its size and can be provided separately as part of the load-test evidence.
+The resulting capture is approximately **914 MB** and is stored in the repository using **Git LFS** because of its size.
 
 ---
 
