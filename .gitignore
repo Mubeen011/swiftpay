@@ -1,5 +1,4 @@
 .idea/
 *.iml
 target/
-# Load test captures
-load-test/*.pcapng
+
